@@ -25,13 +25,13 @@ public class TransacaoServiceImpl implements TransacaoService {
     @Transactional
     @Override
     public CartaoDTO transacao(TransacaoDTO transacaoDao) {
-        CartaoDTO cartaoDTO = cartaoService.buscarCartao(transacaoDao.getNumeroCartao());
+        CartaoDTO cartaoDTO = cartaoService.validaExisteCartao(transacaoDao.getNumeroCartao());
         cartaoService.validarSenhaCartao(cartaoDTO, transacaoDao.getSenha());
         validaSaldoInsuficiente(transacaoDao, cartaoDTO);
 
         cartaoDTO.setSaldoCartao(cartaoDTO.getSaldoCartao().subtract(transacaoDao.getValor()));
 
-        return cartaoService.cadastrarCartao(cartaoDTO);
+        return cartaoService.altera(cartaoDTO);
     }
 
     private void validaSaldoInsuficiente(TransacaoDTO transacaoDao, CartaoDTO cartaoDao) {
