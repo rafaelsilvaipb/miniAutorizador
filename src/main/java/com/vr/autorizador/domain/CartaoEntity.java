@@ -1,5 +1,6 @@
 package com.vr.autorizador.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @Setter
+@Builder
 @Table(name = "cartao")
 public class CartaoEntity implements Serializable {
 

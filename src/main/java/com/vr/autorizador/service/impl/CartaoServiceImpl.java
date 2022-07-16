@@ -15,33 +15,31 @@ import java.math.BigDecimal;
 public class CartaoServiceImpl implements CartaoService {
 
     private final CartaoRepository repository;
-    private final CartaoMapper mapper;
 
-    public CartaoServiceImpl(CartaoRepository repository, CartaoMapper mapper) {
+    public CartaoServiceImpl(CartaoRepository repository) {
         this.repository = repository;
-        this.mapper = mapper;
     }
 
     @Override
     public CartaoDTO salva(CartaoDTO cartaoDTO) {
         CartaoDTO busca =  buscarCartao(cartaoDTO);
-        CartaoEntity save = repository.save(mapper.dtoToEntity(busca));
-        return mapper.entityToDto(save);
+        CartaoEntity save = repository.save(CartaoMapper.dtoToEntity(busca));
+        return CartaoMapper.entityToDto(save);
     }
 
     @Override
     public CartaoDTO altera(CartaoDTO cartaoDTO) {
-        CartaoEntity save = repository.save(mapper.dtoToEntity(cartaoDTO));
-        return mapper.entityToDto(save);
+        CartaoEntity save = repository.save(CartaoMapper.dtoToEntity(cartaoDTO));
+        return CartaoMapper.entityToDto(save);
     }
 
 
     @Override
     public CartaoDTO buscarCartao(CartaoDTO cartaoDTO) {
         CartaoEntity cartaoEntity = repository.findByNumeroCartao(cartaoDTO.getNumeroCartao())
-                .orElse(mapper.dtoToEntity(cartaoDTO));
+                .orElse(CartaoMapper.dtoToEntity(cartaoDTO));
 
-        return mapper.entityToDto(cartaoEntity);
+        return CartaoMapper.entityToDto(cartaoEntity);
     }
 
     @Override
@@ -58,7 +56,7 @@ public class CartaoServiceImpl implements CartaoService {
 
     @Override
     public CartaoDTO validaExisteCartao(String numeroCartao) {
-       return mapper.entityToDto(repository.findByNumeroCartao(numeroCartao)
+       return CartaoMapper.entityToDto(repository.findByNumeroCartao(numeroCartao)
                 .orElseThrow(() -> new CartaoNaoExistenteException()));
     }
 }

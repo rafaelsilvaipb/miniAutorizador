@@ -2,22 +2,27 @@ package com.vr.autorizador.mapper;
 
 import com.vr.autorizador.domain.CartaoEntity;
 import com.vr.autorizador.dto.CartaoDTO;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring")
-public interface CartaoMapper  {
-    CartaoMapper INSTANCE = Mappers.getMapper( CartaoMapper.class );
+@Component
+public class CartaoMapper {
 
-    @Mapping(source = "numeroCartao", target = "numeroCartao")
-    @Mapping(source = "senha", target = "senha")
-    @Mapping(source = "saldoCartao", target = "saldoCartao")
-    CartaoDTO entityToDto(CartaoEntity entity);
+    public static CartaoEntity dtoToEntity(CartaoDTO cartaoDTO){
+        return CartaoEntity.builder()
+                .id(cartaoDTO.getId())
+                .numeroCartao(cartaoDTO.getNumeroCartao())
+                .saldoCartao(cartaoDTO.getSaldoCartao())
+                .senha(cartaoDTO.getSenha())
+                .build();
+    }
 
-    @Mapping(source = "numeroCartao", target = "numeroCartao")
-    @Mapping(source = "senha", target = "senha")
-    @Mapping(source = "saldoCartao", target = "saldoCartao")
-    CartaoEntity dtoToEntity(CartaoDTO dto);
+    public static CartaoDTO entityToDto(CartaoEntity cartaoEntity){
+        return CartaoDTO.builder()
+                .id(cartaoEntity.getId())
+                .numeroCartao(cartaoEntity.getNumeroCartao())
+                .saldoCartao(cartaoEntity.getSaldoCartao())
+                .senha(cartaoEntity.getSenha())
+                .build();
+    }
 
 }
