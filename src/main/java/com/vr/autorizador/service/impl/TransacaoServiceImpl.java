@@ -35,7 +35,7 @@ public class TransacaoServiceImpl implements TransacaoService {
     }
 
     private void validaSaldoInsuficiente(TransacaoDTO transacaoDao, CartaoDTO cartaoDao) {
-        if (cartaoDao.getSaldoCartao().compareTo(transacaoDao.getValor()) <= 0)
+        if (cartaoDao.getSaldoCartao().compareTo(transacaoDao.getValor()) < 0)
             throw new SaldoInsuficienteException();
     }
 

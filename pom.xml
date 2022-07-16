@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.vr.autorizador</groupId>
-	<artifactId>Autorizador</artifactId>
+	<artifactId>autorizador</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Autorizador</name>
 	<description>Autorizador para o teste da VR</description>
@@ -24,6 +24,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
